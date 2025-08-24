@@ -68,6 +68,56 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# YoussefGad
-# YoussefGad
-# YoussefGad
+
+# Youssef Gad – Portfolio
+
+Welcome to my personal portfolio website, built with React and Tailwind CSS.  
+Explore my projects, skills, and contact information—all in one place!
+
+## 🚀 Tech Stack
+
+- **Frontend:** React, Tailwind CSS (via CDN)
+- **Languages:** JavaScript (ES6+)
+- **Tooling:** Create React App, ESLint
+
+## 📄 Features
+
+- Responsive design for all devices
+- Light/Dark theme toggle
+- Project showcase with live demos and GitHub links
+- Contact form
+
+## 📁 Project Structure
+
+```
+projectone/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   ├── App.js
+│   └── ...
+├── package.json
+└── README.md
+```
+
+## 🧑‍💻 How to Run Locally
+
+```bash
+git clone https://github.com/YoussefGad97/YoussefGad.git
+cd YoussefGad
+npm install
+npm start
+```
+
+## 🌐 Live Demo
+
+[View Portfolio Online](#) <!-- Replace # with your deployed site URL if available -->
+
+## 📬 Contact
+
+Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/youssef-gad/) or use the contact form on the website!
+
+---
+
+> Built and maintained by **Youssef Gad**
