@@ -126,12 +126,12 @@ const HomePage = ({ setCurrentPage }) => ( // Receive setCurrentPage to navigate
   <section id="home" className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)] py-16 px-4 text-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-xl">
     <div className="max-w-4xl mx-auto">
       <img
-        src="https://placehold.co/150x150/CCE5FF/0056B3?text=Your+Photo" // Placeholder for your photo
+        src="/Profile.png"
         alt="Your Profile"
         className="w-40 h-40 rounded-full object-cover border-4 border-blue-400 dark:border-blue-600 shadow-lg mb-8"
       />
       <h2 className="text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
-        Hi, I'm <span className="text-blue-600 dark:text-blue-400">Your Name</span>.
+        Hi, I'm <span className="text-blue-600 dark:text-blue-400">Youssef Gad</span>.
       </h2>
       <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
         A passionate <span className="font-semibold text-blue-700 dark:text-blue-300">Frontend Developer</span> dedicated to building
@@ -291,6 +291,17 @@ const ProjectsPage = () => {
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
+        </div>
+        {/* Vercel Projects Portfolio Link */}
+        <div className="mt-12 text-center">
+          <a
+            href="https://vercel.com/youssef-gads-projects-48f45a94"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 bg-black text-white font-semibold rounded-lg shadow-lg hover:bg-gray-800 transition-colors text-lg"
+          >
+            View All My Deployed Projects on Vercel
+          </a>
         </div>
       </div>
     </section>
