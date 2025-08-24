@@ -72,7 +72,7 @@ const Navbar = ({ setCurrentPage }) => { // Receive setCurrentPage as prop
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
           <a href="#" onClick={(e) => handleNavLinkClick(e, 'home')} className="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-            YourName<span className="text-blue-600 dark:text-blue-400">.dev</span>
+            Youssef Gad <span className="text-blue-600 dark:text-blue-400">.dev</span>
           </a>
         </h1>
         <div className="flex items-center space-x-4">
@@ -310,36 +310,30 @@ const ProjectsPage = () => {
 
 // --- Contact Page Component ---
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [status, setStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
+  const [status, setStatus] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mgvlwzjk";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
+    const formData = new FormData(e.target);
 
-    // Simulate API call
     try {
-      // In a real application, you would send this to a backend API
-      // await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
-      console.log('Form Data Submitted:', formData);
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' }); // Clear form
-    } catch (error) {
-      console.error('Error submitting form:', error);
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response.ok) {
+        setStatus('success');
+        e.target.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch {
       setStatus('error');
     }
   };
@@ -351,36 +345,75 @@ const ContactPage = () => {
           Contact Me
         </h2>
         <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-8">
-          Have a question or want to work together? Fill out the form below or connect with me on social media.
+          Recruiters and collaborators: Please fill out the form below. I look forward to connecting!
         </p>
         <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl shadow-md space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Name
+              Full Name
             </label>
             <input
               type="text"
               id="name"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
               required
+              placeholder="e.g. Jane Doe"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white transition-colors"
             />
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Email
+              Email Address
             </label>
             <input
               type="email"
               id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
               required
+              placeholder="e.g. jane@company.com"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white transition-colors"
             />
+          </div>
+          <div>
+            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Subject
+            </label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              required
+              placeholder="e.g. Frontend Developer Position"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white transition-colors"
+            />
+          </div>
+          <div>
+            <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              LinkedIn Profile (optional)
+            </label>
+            <input
+              type="url"
+              id="linkedin"
+              name="linkedin"
+              placeholder="e.g. https://linkedin.com/in/your-profile"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white transition-colors"
+            />
+          </div>
+          <div>
+            <label htmlFor="reason" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Reason for Contact
+            </label>
+            <select
+              id="reason"
+              name="reason"
+              required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white transition-colors"
+            >
+              <option value="">Select a reason</option>
+              <option value="job">Job Opportunity</option>
+              <option value="collaboration">Collaboration</option>
+              <option value="general">General Inquiry</option>
+            </select>
           </div>
           <div>
             <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -390,9 +423,8 @@ const ContactPage = () => {
               id="message"
               name="message"
               rows="5"
-              value={formData.message}
-              onChange={handleChange}
               required
+              placeholder="Type your message here..."
               className="mt-1 block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-600 text-gray-900 dark:text-white resize-y transition-colors"
             ></textarea>
           </div>
