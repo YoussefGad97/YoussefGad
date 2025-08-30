@@ -194,11 +194,14 @@ const LinkedinIcon = () => (
 
 // --- Navigation Component ---
 const Navbar = ({ setCurrentPage }) => {
-  // Receive setCurrentPage as prop
   const { theme, toggleTheme } = useTheme();
-  // currentPage state is now managed higher up in App component
-  // to be passed down. For now, using local state for active class.
-  const [activePage, setActivePage] = useState("home");
+  // Sync activePage with currentPage from localStorage on mount and when currentPage changes
+  const [activePage, setActivePage] = useState(() => localStorage.getItem("currentPage") || "home");
+
+  useEffect(() => {
+    const storedPage = localStorage.getItem("currentPage") || "home";
+    setActivePage(storedPage);
+  }, [localStorage.getItem("currentPage")]);
 
   const navLinks = [
     { name: "Home", icon: HomeIcon, path: "home" },
@@ -208,9 +211,10 @@ const Navbar = ({ setCurrentPage }) => {
   ];
 
   const handleNavLinkClick = (e, page) => {
-    e.preventDefault(); // Prevent default link behavior (hash change)
-    setCurrentPage(page); // Update the page state in the App component
-    setActivePage(page); // Update local state for active link styling
+    e.preventDefault();
+    setCurrentPage(page);
+    setActivePage(page);
+    localStorage.setItem("currentPage", page);
   };
 
   return (
@@ -231,7 +235,7 @@ const Navbar = ({ setCurrentPage }) => {
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a
-                  href="#" // Removed hash to prevent security error
+                  href="#"
                   onClick={(e) => handleNavLinkClick(e, link.path)}
                   className={`flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors rounded-md p-2
                     ${
@@ -764,15 +768,20 @@ const ContactPage = () => {
 
 // --- Main App Component ---
 function App() {
-  const [currentPage, setCurrentPage] = useState("home");
+  // Read from localStorage on initial load
+  const [currentPage, setCurrentPage] = useState(() => {
+    return localStorage.getItem("currentPage") || "home";
+  });
 
-  // No longer listening to hashchange, relying on internal state for navigation
-  // and passing setCurrentPage down to Navbar.
+  // Save to localStorage whenever currentPage changes
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage);
+  }, [currentPage]);
 
   const renderPage = () => {
     switch (currentPage) {
       case "home":
-        return <HomePage setCurrentPage={setCurrentPage} />; // Pass setCurrentPage to HomePage
+        return <HomePage setCurrentPage={setCurrentPage} />;
       case "about":
         return <AboutPage />;
       case "projects":
@@ -787,13 +796,8 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen flex flex-col">
-        {" "}
-        {/* Removed font-sans, antialiased, bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200, transition-colors duration-300 from here */}
-        <Navbar setCurrentPage={setCurrentPage} />{" "}
-        {/* Pass setCurrentPage down */}
+        <Navbar setCurrentPage={setCurrentPage} />
         <main className="flex-grow container mx-auto px-4 py-8 mt-20 mb-8">
-          {" "}
-          {/* Added margin-top to clear fixed navbar */}
           {renderPage()}
         </main>
         <Footer />
