@@ -4,11 +4,12 @@ import Project2 from "./assets/images/Project2.png"; // Ensure this image exists
 import Project3 from "./assets/images/Project3.png"; // Ensure this image exists in the specified path
 import Project4 from "./assets/images/Project4.png"; // Ensure this image exists in the specified path
 import Project5 from "./assets/images/Project5.png"; // Ensure this image exists in the specified path
+import Project6 from "./assets/images/Project6.png"; // Ensure this image exists in the specified path
 
 // Create a Context for the theme
 const ThemeContext = createContext();
 
-// Theme Provider Component
+// Theme Provider Component`
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("light"); // Default theme is light
 
@@ -238,10 +239,9 @@ const Navbar = ({ setCurrentPage }) => {
                   href="#"
                   onClick={(e) => handleNavLinkClick(e, link.path)}
                   className={`flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors rounded-md p-2
-                    ${
-                      activePage === link.path
-                        ? "bg-blue-100 dark:bg-blue-700 text-blue-800 dark:text-white"
-                        : ""
+                    ${activePage === link.path
+                      ? "bg-blue-100 dark:bg-blue-700 text-blue-800 dark:text-white"
+                      : ""
                     }`}
                 >
                   <link.icon className="w-5 h-5" />
@@ -542,6 +542,23 @@ const ProjectsPage = () => {
       liveLink: "https://redline-media.vercel.app/", // Link to itself
 
       githubLink: "https://github.com/YoussefGad97/RedlineMedia",
+    },
+    {
+      id: 6,
+      title: "Bakery Shop Website",
+      description:
+        "A bakery shop's website featuring their products, services, and contact details.",
+      image: Project6,
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "React Router",
+        "Context API",
+        "Axios",
+      ],
+      liveLink: "https://bakery-74f9q4qcu-youssef-gads-projects-48f45a94.vercel.app/", // Link to itself
+
+      githubLink: "https://github.com/YoussefGad97/Bakery",
     },
   ];
 
