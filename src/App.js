@@ -404,11 +404,14 @@ const AboutPage = () => (
 
 // --- Projects Page Component ---
 const ProjectCard = ({ project }) => (
-  <div className="bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+  <div
+  className="bg-white dark:bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 hover:scale-105 group"
+    style={{ cursor: "pointer" }}
+  >
     <img
       src={project.image}
       alt={project.title}
-      className="w-full h-48 object-cover object-center"
+  className="w-full h-48 object-cover object-center group-hover:scale-105 transition-all duration-300"
       onError={(e) => {
         e.target.onerror = null;
         e.target.src =
@@ -426,7 +429,7 @@ const ProjectCard = ({ project }) => (
         {project.technologies.map((tech) => (
           <span
             key={tech}
-            className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-semibold px-3 py-1 rounded-full"
+            className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-semibold px-3 py-1 rounded-full group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 transition-all duration-300"
           >
             {tech}
           </span>
@@ -438,7 +441,7 @@ const ProjectCard = ({ project }) => (
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors shadow-md"
+            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors shadow-md group-hover:scale-105"
           >
             Live Demo
           </a>
@@ -448,7 +451,7 @@ const ProjectCard = ({ project }) => (
             href={project.githubLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 text-sm font-medium rounded-md hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500 transition-colors shadow-md"
+            className="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 text-sm font-medium rounded-md hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500 transition-colors shadow-md group-hover:scale-105"
           >
             <GithubIcon className="w-4 h-4 mr-2" />
             GitHub
